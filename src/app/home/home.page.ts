@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {LoadingController, IonSlides} from '@ionic/angular';
 
 declare var google;
 
 interface Marker {
-  position: {
-    lat: number,
-    lng: number,
-  };
+  lat: number;
+  lng: number;
   title: string;
+  image: string;
+  text: string;
+  markerObj?: any;
 }
 
 
@@ -18,73 +20,86 @@ interface Marker {
 })
 export class HomePage implements OnInit{
 
-  map = null;
+  @ViewChild(IonSlides) slides: IonSlides;
+
+  mapRef = null;
+  infoWindowRef = null;
   markers: Marker[] = [
     {
-      position: {
-        lat: -33.51555080974272,
-        lng: -70.71828389366198,
-      },
-      title: 'Plaza Oeste'
+      lat: -33.51555080974272,
+      lng: -70.71828389366198,
+      title: 'Plaza Oeste',
+      image: 'https://lh5.googleusercontent.com/p/AF1QipOCgzq_0DYB9AxD-ItTG01x2csLsSfWsawBCypc=w408-h306-k-no',
+      text: 'Animi voluptatem, aliquid impedit ratione placeat necessitatibus quisquam molestiae obcaecati laudantium?'
     },
     {
-      position: {
-        lat: -33.50831625044341,
-        lng: -70.73444091370295,
-      },
-      title: 'Estadio Municipal Benito Juárez'
+      lat: -33.50831625044341,
+      lng: -70.73444091370295,
+      title: 'Estadio Municipal Benito Juárez',
+      image: 'https://lh5.googleusercontent.com/p/AF1QipMGZeu88O8uZvFOX9PKug7gz-VRhhiXQ78hAFZU=w408-h306-k-no',
+      text: 'Animi voluptatem, aliquid impedit ratione placeat necessitatibus quisquam molestiae obcaecati laudantium?'
     },
     {
-      position: {
-        lat: -33.441424520951145,
-        lng: -70.64430518275593,
-      },
-      title: 'Cerro Santa Lucia'
+      lat: -33.441424520951145,
+      lng: -70.64430518275593,
+      title: 'Cerro Santa Lucia',
+      image: 'https://lh5.googleusercontent.com/p/AF1QipPIXxrXfshAD6eHbkGScPdNqYBwfJ6ol4qriq2n=w408-h306-k-no',
+      text: 'Animi voluptatem, aliquid impedit ratione placeat necessitatibus quisquam molestiae obcaecati laudantium?'
     },
     {
-      position: {
-        lat: -33.46263906783662,
-        lng: -70.66018498301078,
-      },
-      title: 'Movistar Arenas'
-    },
+      lat: -33.46263906783662,
+      lng: -70.66018498301078,
+      title: 'Movistar Arenas',
+      image: 'https://lh5.googleusercontent.com/p/AF1QipOJOq3vm1Gfpa3d4dPR_ca2C240J_PBv701zRAE=w408-h544-k-no',
+      text: 'Animi voluptatem, aliquid impedit ratione placeat necessitatibus quisquam molestiae obcaecati laudantium?'
+    }
   ];
 
-  constructor() {}
+  constructor( 
+    private loadingCtrl: LoadingController
+    ){
+      this.infoWindowRef = new google.maps.InfoWindow();
+  }
 
   ngOnInit() {
     this.loadMap();
   }
 
-  loadMap() {
-    // create a new map by passing HTMLElement
+  async loadMap() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    const marker = this.markers[0];
     const mapEle: HTMLElement = document.getElementById('map');
-    // create LatLng object
-    const myLatLng = {lat: -33.515246582179515, lng: -70.71845196685176};
-    // create map
-    this.map = new google.maps.Map(mapEle, {
-      center: myLatLng,
-      zoom: 12
+    this.mapRef = new google.maps.Map(mapEle, {
+      center: {lat: marker.lat, lng: marker.lng},
+      zoom: 15
     });
-
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      this.renderMarkers();
-      mapEle.classList.add('show-map');
+    google.maps.event
+    .addListenerOnce(this.mapRef, 'idle', () => {
+      loading.dismiss();
     });
   }
 
-  renderMarkers() {
+  private addMaker(itemMarker: Marker) {
+    const marker = new google.maps.Marker({
+      position: { lat: itemMarker.lat, lng: itemMarker.lng },
+      map: this.mapRef,
+      title: itemMarker.title
+    });
+    return marker;
+  }
+
+  private loadMarkers(){
     this.markers.forEach(marker => {
-      this.addMarker(marker);
+      const markerObj = this.addMaker(marker);
+      marker.markerObj = markerObj;
     });
   }
 
-  addMarker(marker: Marker) {
-    return new google.maps.Marker({
-      position: marker.position,
-      map: this.map,
-      title: marker.title
-    });
+  async onSlideDidChange() {
+    const currentSlide = await this.slides.getActiveIndex();
+    const marker = this.markers[currentSlide];
+    this.mapRef.panTo({lat: marker.lat, lng: marker.lng});
   }
 
 }
