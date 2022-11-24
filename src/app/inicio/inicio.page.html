@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estacionamientos Cercanos</ion-title>
+    <ion-buttons slot="end" [routerLink]="['/login']" (click)="limpiar()">
+      <ion-icon size="large" name="exit-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="listado.length > 0">
+    <div *ngFor="let aux of listado">
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{aux.direccion}}</ion-card-title>
+    <ion-card-subtitle></ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-img src="https://tecnautas.cl/wp-content/uploads/2022/01/google-maps-satellite.png"></ion-img> 
+    <ion-label><h2>Valor Estacionamiento:</h2><h1> ${{aux.valor}} x hora</h1></ion-label>
+    <ion-button shape="round" [routerLink]="['../pago/', aux.id]">
+      <ion-label>
+        Arrendar
+      </ion-label>
+    </ion-button>
+    <ion-button shape="round" [routerLink]="['/home']">
+      <ion-icon name="map-outline"></ion-icon>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      PARKING ZONE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true">
+  
+  <ion-img src="">INSERTAR LOGO</ion-img> 
+
+  <br>
+  <br>
+  
+  <ion-item >
+    <ion-label position="floating">Usuario</ion-label>
+      <ion-input placeholder="Ingrese su usuario" #usuario value={{USU}} type="text"></ion-input>
+
+  </ion-item>
+  <ion-item>
+  <ion-label position="floating">Contraseña</ion-label>
+    <ion-input placeholder="Ingrese su Contraseña" #contrasena value="{{CONT}}" type="password"></ion-input>
+  </ion-item>  
+
+  <ion-item>
+    <ion-checkbox slot="start"></ion-checkbox>
+    <ion-label>Mantener Sesion Iniciada</ion-label>
+  </ion-item>
+  
+
+  <ion-button (click)="agregar(usuario, contrasena)"  color="warning" expand="block" shape="round">
+    <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+    Ingresar
+  </ion-button>
+
+  <br>
+
+  <ion-button [routerLink]="['/restablecer']" color="secondary" expand="block" shape="round">
+    <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+    Restablecer Contraseña
+  </ion-button>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button color="success"  expand="block" [routerLink]="['/registro']">Crear Cuenta</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <ion-item >
+    <ion-label position="floating"><h1>Rellene los campos con sus datos:</h1></ion-label>
+    <br/>
+    <ion-label position="floating">Nombre</ion-label>
+      <ion-input placeholder="Ingrese su nombre completo" #nom value="{{NOM}}" type="text"></ion-input>
+  </ion-item>
+  <ion-item >
+    <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input placeholder="Ingrese un nombre de usuario" #usuario value={{USU}} type="text"></ion-input>
+
+  </ion-item>
+
+  <ion-item >
+    <ion-label position="floating">Contraseña</ion-label>
+      <ion-input placeholder="Ingrese su contraseña"  #contrasena value="{{CONT}}" type="password"></ion-input>
+
+  </ion-item>
+
+  <ion-item >
+    <ion-label position="floating">Correo</ion-label>
+      <ion-input placeholder="email@domain.com" #correo value="{{CORR}}" type="email"></ion-input>
+
+  </ion-item>
+
+  <ion-item >
+    <ion-label position="floating">Rut</ion-label>
+      <ion-input placeholder="00000000-K" #rut value="{{RUT}}" type="text"></ion-input>
+
+  </ion-item>
+
+  <ion-item >
+    <ion-label position="floating">Patente (opcional)</ion-label>
+      <ion-input placeholder="Ingrese su patente" type="text"></ion-input>
+
+  </ion-item>
+  <br/>
+
+  <ion-item>
+  <ion-label><h1>Seleccione el tipo de usuario.</h1></ion-label>
+  </ion-item>
+
+  <ion-list>
+    <ion-radio-group value="strawberries">
+      <ion-item>
+        <ion-label>Cliente</ion-label>
+        <ion-radio slot="end" value="grapes"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Dueño</ion-label>
+        <ion-radio slot="end" value="strawberries"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+<br/>
+
+  <ion-button (click)="agregar(nombre, contrasena)"  color="secondary" expand="block" shape="round">
+    <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+    Registrarse
+  </ion-button>
+
+
+</ion-content>

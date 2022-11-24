@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Restablecer Contraseña</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <br>
+  <ion-item>
+    <ion-label position="floating">Ingrese Nueva contraseña</ion-label>
+    <ion-input #password></ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-label position="floating">Confirme Contraseña</ion-label>
+    <ion-input #newpassword></ion-input>
+  </ion-item>  
+<br>
+<br>
+<ion-button [routerLink]="['/inicio']" (click)="grabar(password, newpassword)" color="warning" expand="block" shape="round">
+  <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+  Confirmar
+</ion-button>
+
+</ion-content>

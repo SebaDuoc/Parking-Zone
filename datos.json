@@ -1,0 +1,55 @@
+
+{
+    "usuariosClientes": 
+    [
+        {
+            "id": 1,
+            "nombre": "Ana",
+            "apellido": "Ríos",
+            "correo": "anarios@gmail.com",
+            "username":"Anarios"
+          },
+          {
+            "id": 2,
+            "nombre": "Luis",
+            "apellido": "Díaz",
+            "correo": "luisdiaz@gmail.com",
+            "username":"Luisdiaz"
+          },
+          {
+            "id": 3,
+            "nombre": "Jose",
+            "apellido": "Aros",
+            "correo": "josearos@gmail.com",
+            "username":"Josearos"
+          },
+          {
+            "id": 4,
+            "nombre": "Maria",
+            "apellido": "Boza",
+            "correo": "mariaboza@gmail.com",
+            "username":"Mariaboza"
+          }
+
+    ],
+    "estacionamientos": [
+        {
+            "id":1,
+            "direccion": "Cerrillos, Duoc Plaza Oeste.",
+            "comuna":"Cerrilos",
+            "valor":2500
+        },
+        {
+            "id":2,
+            "direccion": "Santiago, Estacion Central",
+            "comuna":"Cerrilos",
+            "valor":3200
+        },
+        {
+            "id":3,
+            "direccion": "Cerrillos",
+            "comuna":"Cerrilos",
+            "valor":1500
+        }
+    ]
+}
